@@ -1,8 +1,10 @@
 import { render, screen } from '@testing-library/react';
-import App from './App';
+import userEvent from '@testing-library/user-event';
+import App from './App'
 
-test('renders learn react link', () => {
+test.skip('Renders shop title on load', () => {
   render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+  const heading = screen.getByRole('heading');
+
+  expect(heading.textContent).toMatch(/ultrawild/i);
 });
