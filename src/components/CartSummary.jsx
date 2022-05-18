@@ -1,43 +1,33 @@
 import styled from 'styled-components';
+
 import { StyledButton } from '../styles/StyledButton';
 import { StyledBadge } from '../styles/StyledBadge';
+import { StyledDivider } from '../styles/Table/StyledDivider';
+import { StyledTableRow } from '../styles/Table/StyledTableRow';
+import { StyledStack } from '../styles/Layout/StyledStack';
 
-const StyledStack = styled.div`
+import { ExpandableRow } from './ExpandableRow';
+
+const Container = styled.div`
+  margin-top: 2rem;
   display: flex;
   flex-flow: column nowrap;
-  row-gap: ${(props) => props.gap || '10px'};
-`;
+  row-gap: 2rem;
 
-const StyledRow = styled.div`
-  display: flex;
-  flex-flow: row nowrap;
-  width: 100%;
-  justify-content: space-between;
-  align-items: center;
-  font-family: ${(props) => props.theme.mainFont};
-  font-weight: 300;
-  color: ${(props) => props.theme.main};
+  @media (min-width: ${(props) => props.theme.breakpoint}) {
+    flex-direction: row;
+    column-gap: 2rem;
 
-  p:first-child {
-    text-transform: uppercase;
+    > * {
+      /* width: 50%; */
+      flex: 1;
+    }
   }
 `;
 
-const StyledDivider = styled.div`
-  border-top: 1px solid ${(props) => props.theme.main};
-  margin-bottom: 5px;
-`;
-
-StyledRow.defaultProps = {
+Container.defaultProps = {
   theme: {
-    main: '#282c34',
-    mainFont: 'helvetica, sans-serif',
-  },
-};
-
-StyledDivider.defaultProps = {
-  theme: {
-    main: '#282c34',
+    breakpoint: '650px',
   },
 };
 
@@ -51,39 +41,45 @@ const remainShipping = () => {
 
 export function CartSummary() {
   return (
-    <div>
-      <StyledStack gap="2rem">
+    <Container>
+      {/* Left section after breakpoint */}
+      <StyledStack gap="1rem">
+        <ExpandableRow>
+          <p>Leave a note with your order</p>
+        </ExpandableRow>
         <StyledBadge>
           <p>
             You are only ${remainShipping()} away from Free Domestic Shipping!
           </p>
           <p>(Excludes International)</p>
         </StyledBadge>
+      </StyledStack>
+      {/* Right section after breakpoint */}
+      <StyledStack gap="2rem">
         <StyledStack gap="1rem">
-          <StyledRow>
-            <p>total</p>
+          <StyledTableRow>
+            <p>subtotal</p>
             <p>${total()} </p>
-          </StyledRow>
-          <StyledRow>
+          </StyledTableRow>
+          <StyledTableRow>
             <p>tax</p>
             <p>Calculated at checkout</p>
-          </StyledRow>
-          <StyledRow>
+          </StyledTableRow>
+          <StyledTableRow>
             <p>shipping</p>
             <p>Calculated at checkout</p>
-          </StyledRow>
+          </StyledTableRow>
           <StyledDivider />
-          <StyledRow>
-            {' '}
+          <StyledTableRow>
             <p>total</p>
-            <p>${total()} </p>
-          </StyledRow>
+            <h4>${total()} CAD</h4>
+          </StyledTableRow>
         </StyledStack>
         <StyledStack gap="0.5rem">
           <StyledButton>View Cart</StyledButton>
           <StyledButton filled>CheckOut</StyledButton>
         </StyledStack>
       </StyledStack>
-    </div>
+    </Container>
   );
 }

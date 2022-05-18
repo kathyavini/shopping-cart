@@ -1,22 +1,22 @@
-import { Outlet } from 'react-router-dom';
-import { Navbar } from './components/Navbar';
-import { StyledButton } from './styles/StyledButton';
+import styled from 'styled-components';
 import { theme } from './styles/Theme';
 import { ThemeProvider } from 'styled-components';
-import { CartSummary } from './components/CartSummary';
+
+import { Outlet } from 'react-router-dom';
+import { Navbar } from './components/Navbar';
+import { Shop } from './pages/Shop';
+import { Cart } from './pages/Cart';
+
 import './App.css';
 
 function App() {
   return (
-    <div>
-      <Navbar />
-      <Outlet />
-      <ThemeProvider theme={theme}>
-        <StyledButton>Default Button</StyledButton>
-        <StyledButton filled>Filled Button</StyledButton>
-        <CartSummary />
-      </ThemeProvider>
-    </div>
+    <ThemeProvider theme={theme}>
+      <div className="app-container">
+        <Navbar />
+        <Outlet />
+      </div>
+    </ThemeProvider>
   );
 }
 

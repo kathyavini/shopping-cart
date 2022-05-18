@@ -2,12 +2,19 @@
     /* outline: 1px solid salmon; */
     margin: 0;
     padding: 0;
+    box-sizing: border-box;
 }
 
-body {
-    padding: 1rem;
+html, body, #root {
+    min-width: 100vw;
+    min-height: 100%;
 }
 
-body ul {
-    list-style-type: none;
+.app-container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-flow: column nowrap;
+    align-items: center;
+    background-color: #faf4e8;
 }

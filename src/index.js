@@ -2,9 +2,9 @@ import React from 'react';
 import ReactDOM from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import { Routes, Route } from 'react-router-dom';
-import { Shop } from './routes/Shop';
-import { Home } from './routes/Home';
-import { Cart } from './routes/Cart';
+import { Shop } from './pages/Shop';
+import { Home } from './pages/Home';
+import { Cart } from './pages/Cart';
 import App from './App';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
@@ -13,7 +13,7 @@ root.render(
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<App />}>
-          <Route path="/home" element={<Home />} />
+          <Route index element={<Home />} />
           <Route path="/shop" element={<Shop />} />
           <Route path="/cart" element={<Cart />} />
         </Route>

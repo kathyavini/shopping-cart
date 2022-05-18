@@ -9,4 +9,16 @@ export const theme = {
   white: 'white', // may adjust
   mainFont: "'Work Sans', sans-serif",
   secondaryFont: "'Playfair Display', serif",
+  breakpoint: '650px',
+  breakpointM: '850px',
+};
+
+// Based on the styled components webpage and referenced as default props throughout all styled component files
+export const defauts = {
+  main: 'palevioletred',
+  secondary: 'rebeccapurple',
+  secondaryContrast: 'rebeccapurple',
+  white: 'white',
+  black: '#282c34',
+  mainFont: 'helvetica, sans-serif',
 };
