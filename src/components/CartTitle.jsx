@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { Link, NavLink } from 'react-router-dom';
 import styled from 'styled-components';
 import { StyledButton } from '../styles/StyledButton';
 import { StyledDivider } from '../styles/Table/StyledDivider';
@@ -29,14 +30,20 @@ const StyledTitleRow = styled(StyledRow)`
   }
 `;
 
-const BackContainer = styled.div`
+const BackContainer = styled(Link)`
   display: flex;
   align-items: center;
   font-size: 2rem;
   font-weight: 400;
+  text-decoration: none;
+  color: ${(props) => props.theme.main};
 
   span:nth-child(2) {
     display: none;
+  }
+
+  &:active {
+    color: ${(props) => props.theme.secondaryContrast};
   }
 
   @media (min-width: ${(props) => props.theme.breakpointM}) {
@@ -61,7 +68,7 @@ export function CartTitle() {
   return (
     <>
       <StyledTitleRow>
-        <BackContainer>
+        <BackContainer to="/shop">
           <Icon className="material-icons">arrow_back</Icon>
           <span>Continue shopping</span>
         </BackContainer>

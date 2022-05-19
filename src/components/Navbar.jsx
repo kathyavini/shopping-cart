@@ -96,14 +96,16 @@ const Badge = styled.div`
   position: absolute;
   right: -0.5rem;
   top: -0.5rem;
-
-  /* p {
-    color: ${(props) => props.theme.main};
-  } */
 `;
 
-export function Navbar() {
-  const itemCount = 3;
+export function Navbar({ cart }) {
+  const itemCount = () => {
+    let count = 0;
+    cart.forEach((item) => {
+      count += item.qty;
+    });
+    return count;
+  };
 
   return (
     <ContainerOuter>
@@ -120,7 +122,7 @@ export function Navbar() {
             <MainLinks>
               <Icon className="material-icons">shopping_cart</Icon>
               <Badge>
-                <p>{itemCount}</p>
+                <p>{itemCount()}</p>
               </Badge>
             </MainLinks>
           </NavLink>

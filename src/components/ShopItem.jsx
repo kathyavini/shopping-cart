@@ -46,18 +46,25 @@ const Price = styled.p`
   font-family: ${(props) => props.theme.mainFont};
 `;
 
-export function ShopItem() {
-  const price = '12.50';
+export function ShopItem({ item, handleClick }) {
+  const [imgAlt, setImgAlt] = useState(true);
 
   return (
     <Container>
-      <StyledStack gap="0.7rem" center>
-        <StyledImage src={matcha} />
-        <Title>Matcha Tea</Title>
-        <Subtitle>Simply delicious</Subtitle>
+      <StyledStack
+        gap="0.7rem"
+        center
+        onMouseEnter={() => setImgAlt(false)}
+        onMouseLeave={() => setImgAlt(true)}
+      >
+        <StyledImage src={imgAlt ? item.imageAlt : item.image} />
+        <Title>{item.name}</Title>
+        <Subtitle>{item.description}</Subtitle>
         <StyledDivider width="2rem" margin=".5rem" />
-        <Price>${price} CAD</Price>
-        <StyledAnimatedButton>Add to Cart</StyledAnimatedButton>
+        <Price>${item.price} CAD</Price>
+        <StyledAnimatedButton onClick={handleClick}>
+          Add to Cart
+        </StyledAnimatedButton>
       </StyledStack>
     </Container>
   );

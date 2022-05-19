@@ -7,6 +7,8 @@ const Container = styled.div`
   width: 100vw;
   background-image: url(${(props) => props.bgImg});
   background-size: cover;
+  /* background-position: bottom center; */
+  background-position-y: 35%;
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;
@@ -25,8 +27,11 @@ const HomeTitle = styled.h1`
 // Leaves and cup
 const imgSource = 'https://source.unsplash.com/Qaor6nxikUM';
 
-// Tea kettle
+// Copper cups
 // const imgSource = 'https://source.unsplash.com/Tp1yIvG7aBw/';
+
+// Elegant dark cup
+// const imgSource = 'https://source.unsplash.com/E0_DOo06c8U/';
 
 export function Home() {
   return (

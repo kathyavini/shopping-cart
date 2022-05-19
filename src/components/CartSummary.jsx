@@ -1,5 +1,7 @@
 import styled from 'styled-components';
 
+import { Link, NavLink } from 'react-router-dom';
+
 import { StyledButton } from '../styles/StyledButton';
 import { StyledBadge } from '../styles/StyledBadge';
 import { StyledDivider } from '../styles/Table/StyledDivider';
@@ -76,7 +78,11 @@ export function CartSummary() {
           </StyledTableRow>
         </StyledStack>
         <StyledStack gap="0.5rem">
-          <StyledButton>View Cart</StyledButton>
+          <Link to="/shop">
+            <StyledButton style={{ width: '100%' }}>
+              Continue Shopping
+            </StyledButton>
+          </Link>
           <StyledButton filled>CheckOut</StyledButton>
         </StyledStack>
       </StyledStack>

@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { ShopItem } from '../components/ShopItem';
+import { items } from '../constants/items';
 
 const Container = styled.div`
   background-color: ${(props) => props.theme.background};
@@ -24,18 +25,37 @@ const Title = styled.h1`
   margin-block: 2rem;
 `;
 
-export function Shop() {
+export function Shop({ cart, setCart }) {
+  const handleAddToCart = (id) => {
+    const matchingItem = cart.some((item) => item.id === id);
+    if (!matchingItem) {
+      setCart([...cart, { id: id, qty: 1 }]);
+      return;
+    }
+
+    const updatedCart = cart.map((item) => {
+      if (item.id === id) {
+        item.qty += 1;
+        // Although I'm thinking of disabling the add button in favour of an "in cart" button
+      }
+      return item;
+    });
+
+    setCart(updatedCart);
+  };
+
+  const renderedItems = items.map((item, index) => (
+    <ShopItem
+      item={item}
+      key={index}
+      handleClick={() => handleAddToCart(item.id)}
+    />
+  ));
+
   return (
     <Container>
       <Title>Our Teas</Title>
-      <Content>
-        <ShopItem />
-        <ShopItem />
-        <ShopItem />
-        <ShopItem />
-        <ShopItem />
-        <ShopItem />
-      </Content>
+      <Content>{renderedItems}</Content>
     </Container>
   );
 }
