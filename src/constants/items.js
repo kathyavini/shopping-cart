@@ -1,4 +1,8 @@
-import images from './images';
+import images from './images.json';
+
+// Run this first to generate an object you can copy-paste into the above .json file. Yes, it's a little ridiculous, sorry
+// import imageObject from '../utils/makeImgObj';
+// console.log(imageObject);
 
 export const items = [
   {
