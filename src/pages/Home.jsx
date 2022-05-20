@@ -5,7 +5,7 @@ import { StyledButton } from '../styles/StyledButton';
 const Container = styled.div`
   height: 100vh;
   width: 100vw;
-  background-image: url(${(props) => props.bgImg});
+  background-image: url(${(props) => props.bgImg[1]});
   background-size: cover;
   /* background-position: bottom center; */
   background-position-y: 25%;
@@ -14,6 +14,10 @@ const Container = styled.div`
   justify-content: center;
   align-items: center;
   gap: 2rem;
+
+  @media (min-width: ${(props) => props.theme.breakpointM}) {
+    background-image: url(${(props) => props.bgImg[0]});
+  }
 `;
 
 const HomeTitle = styled.h1`
@@ -24,8 +28,17 @@ const HomeTitle = styled.h1`
   /* margin-left: -30vw; */
 `;
 
+const backgroundImages = [
+  'https://source.unsplash.com/Tp1yIvG7aBw/',
+  'https://source.unsplash.com/E0_DOo06c8U/',
+];
+
+// function pickOne() {
+//   return Math.floor(Math.random() * backgroundImages.length);
+// }
+
 // Leaves and cup
-const imgSource = 'https://source.unsplash.com/Qaor6nxikUM';
+// const imgSource = 'https://source.unsplash.com/Qaor6nxikUM';
 
 // Copper cups
 // const imgSource = 'https://source.unsplash.com/Tp1yIvG7aBw/';
@@ -35,7 +48,7 @@ const imgSource = 'https://source.unsplash.com/Qaor6nxikUM';
 
 export function Home() {
   return (
-    <Container bgImg={imgSource}>
+    <Container bgImg={backgroundImages}>
       <HomeTitle>Chah</HomeTitle>
       <Link to="/shop">
         <StyledButton filled>Shop Now</StyledButton>

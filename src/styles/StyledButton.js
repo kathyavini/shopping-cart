@@ -66,7 +66,7 @@ export const StyledAnimatedButton = styled.button`
     width: 100%;
     height: 100%;
     transform: scaleX(0);
-    transition: transform 250ms ease-in-out;
+    transition: transform 200ms ease-in-out;
     transform-origin: 0% 50%;
     z-index: -1;
   }

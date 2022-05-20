@@ -6,10 +6,17 @@ import { Home } from './Home';
 import { Cart } from './Cart';
 import { items } from '../constants/items';
 
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 const RouteSwitch = () => {
-  const [cart, setCart] = useState([]);
+  const [cart, setCart] = useState(
+    () => JSON.parse(localStorage.getItem('cart')) || []
+  );
+
+  useEffect(() => {
+    localStorage.setItem('cart', JSON.stringify(cart));
+  }, [cart]);
+
   return (
     <BrowserRouter>
       <Routes>

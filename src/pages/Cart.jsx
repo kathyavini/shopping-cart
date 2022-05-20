@@ -4,6 +4,8 @@ import { CartItem } from '../components/CartItem';
 import { CartTitle } from '../components/CartTitle';
 import { CartSummary } from '../components/CartSummary';
 import { StyledButton } from '../styles/StyledButton';
+import { ThanksMessage } from '../components/ThanksMessage';
+import { useState } from 'react';
 
 const Container = styled.div`
   background-color: ${(props) => props.theme.background};
@@ -16,18 +18,20 @@ const Container = styled.div`
   text-align: center;
 `;
 
-const Message = styled.p`
+const EmptyCartMessage = styled.p`
   font-size: clamp(1.3rem, 0.9rem + 2vw, 2rem);
   padding: 4rem;
 `;
 
 export function Cart({ cart, setCart, items }) {
+  const [thanksVisible, setThanksVisible] = useState(false);
+
   const cartItems = cart.map((cartItem, index) => {
-    const targetItem = items.filter((item) => item.id === cartItem.id);
+    const [targetItem] = items.filter((item) => item.id === cartItem.id);
     return (
       <CartItem
         quantity={cartItem.qty}
-        targetItem={targetItem[0]}
+        targetItem={targetItem}
         key={index}
         cart={cart}
         setCart={setCart}
@@ -37,20 +41,21 @@ export function Cart({ cart, setCart, items }) {
 
   return (
     <Container>
-      <CartTitle />
+      <CartTitle cart={cart} />
       {cart.length ? (
         <>
           {cartItems}
-          <CartSummary />{' '}
+          <CartSummary items={items} cart={cart} />{' '}
         </>
       ) : (
         <>
-          <Message>There are no items in your cart</Message>
+          <EmptyCartMessage>There are no items in your cart</EmptyCartMessage>
           <Link to="/shop">
             <StyledButton>Shop for items</StyledButton>
           </Link>
         </>
       )}
+      {thanksVisible && <ThanksMessage />}
     </Container>
   );
 }

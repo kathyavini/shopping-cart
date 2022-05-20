@@ -62,8 +62,14 @@ const Icon = styled.span`
   flex: 0;
 `;
 
-export function CartTitle() {
-  const items = 3;
+export function CartTitle({ cart }) {
+  const itemCount = () => {
+    let count = 0;
+    cart.forEach((item) => {
+      count += item.qty;
+    });
+    return count;
+  };
 
   return (
     <>
@@ -73,7 +79,7 @@ export function CartTitle() {
           <span>Continue shopping</span>
         </BackContainer>
         <h1>Cart</h1>
-        <h2>{items} ITEM(S)</h2>
+        <h2 aria-label="item-count">{itemCount()} ITEM(S)</h2>
       </StyledTitleRow>
       <StyledDivider />
     </>

@@ -1,4 +1,5 @@
 import styled from 'styled-components';
+// import { useState } from 'react'
 
 import { Link, NavLink } from 'react-router-dom';
 
@@ -33,15 +34,22 @@ Container.defaultProps = {
   },
 };
 
-const total = () => {
-  return '12.50';
-};
+export function CartSummary({ items, cart }) {
+  // const [freeShipping, setFreeShipping] = useState(false);
 
-const remainShipping = () => {
-  return '86.50';
-};
+  const total = () => {
+    let count = 0;
+    cart.forEach((cartItem) => {
+      const [targetItem] = items.filter((item) => item.id === cartItem.id);
+      count += cartItem.qty * +targetItem.price;
+    });
+    return count.toFixed(2);
+  };
 
-export function CartSummary() {
+  const remainShipping = () => {
+    return 50 - +total();
+  };
+
   return (
     <Container>
       {/* Left section after breakpoint */}
@@ -50,10 +58,14 @@ export function CartSummary() {
           <p>Leave a note with your order</p>
         </ExpandableRow>
         <StyledBadge>
-          <p>
-            You are only ${remainShipping()} away from Free Domestic Shipping!
+          <p aria-label="free-shipping">
+            {remainShipping() > 0
+              ? `You are only \$${remainShipping().toFixed(
+                  2
+                )} away from Free Domestic Shipping!`
+              : 'Your order qualifies for Free Domestic Shipping!'}
           </p>
-          <p>(Excludes International)</p>
+          {remainShipping() > 0 && <p>(Excludes International)</p>}
         </StyledBadge>
       </StyledStack>
       {/* Right section after breakpoint */}
@@ -69,12 +81,12 @@ export function CartSummary() {
           </StyledTableRow>
           <StyledTableRow>
             <p>shipping</p>
-            <p>Calculated at checkout</p>
+            <p>{remainShipping() > 0 ? 'Calculated at checkout' : 'FREE'}</p>
           </StyledTableRow>
           <StyledDivider />
           <StyledTableRow>
             <p>total</p>
-            <h4>${total()} CAD</h4>
+            <h4 aria-label="cart-total">${total()} CAD</h4>
           </StyledTableRow>
         </StyledStack>
         <StyledStack gap="0.5rem">

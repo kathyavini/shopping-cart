@@ -8,6 +8,7 @@ import { Outlet } from 'react-router-dom';
 import { Navbar } from '../components/Navbar';
 import { Shop } from './Shop';
 import { Cart } from './Cart';
+import { ThanksMessage } from '../components/ThanksMessage';
 
 function App({ cart }) {
   return (

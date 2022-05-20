@@ -39,14 +39,26 @@ const StyledIconContainer = styled.div`
   justify-content: start;
   align-items: flex-end;
   font-size: 1.1rem;
+
+  span {
+    padding: 0.3rem 0.5rem;
+    transition: background-color 200ms;
+  }
+
+  span:hover {
+    background-color: ${(props) => props.theme.secondary};
+    color: ${(props) => props.theme.secondaryContrast};
+  }
+
+  span:active {
+    filter: brightness(1.1);
+  }
 `;
 
 export function CartItem({ quantity, targetItem, cart, setCart }) {
   const total = () => {
     const itemTotal = +targetItem.price * quantity;
-    return itemTotal.toLocaleString(
-      ('en-CA', { style: 'currency', currency: 'CAD' })
-    );
+    return itemTotal.toFixed(2);
   };
 
   function increment(id) {
@@ -72,6 +84,12 @@ export function CartItem({ quantity, targetItem, cart, setCart }) {
     setCart(filteredCart);
   }
 
+  function deleteItem(id) {
+    const filteredCart = cart.filter((item) => item.id !== id);
+
+    setCart(filteredCart);
+  }
+
   return (
     <Container>
       <StyledRow justify="space-around">
@@ -81,16 +99,18 @@ export function CartItem({ quantity, targetItem, cart, setCart }) {
           <p>{targetItem.description}</p>
         </StyledInfo>
         <StyledIconContainer>
-          <p aria-label="close">✕</p>
+          <span aria-label="close" onClick={() => deleteItem(targetItem.id)}>
+            ✕
+          </span>
         </StyledIconContainer>
       </StyledRow>
-      <StyledRow justify="space-evenly" gap="2rem">
+      <StyledRow justify="end" gap="5rem">
         <QuantityTool
           increment={() => increment(targetItem.id)}
           decrement={() => decrement(targetItem.id)}
           quantity={quantity}
         />
-        <p>Item Total: ${total()}</p>
+        <p aria-label="item-total">${total()} CAD</p>
       </StyledRow>
       <StyledDivider />
     </Container>
