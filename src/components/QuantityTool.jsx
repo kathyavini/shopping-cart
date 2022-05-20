@@ -2,9 +2,6 @@ import styled from 'styled-components';
 import { StyledTableRow } from '../styles/Table/StyledTableRow';
 import { useState } from 'react';
 
-// Not sure if I want this to be fixed width or not :)
-// Probably I will want two sizes
-
 const StyledCounter = styled(StyledTableRow)`
   border: 1px solid
     ${(props) => (props.border ? props.theme.main : 'transparent')};
@@ -46,22 +43,12 @@ StyledCounter.defaultProps = {
   },
 };
 
-export function QuantityTool({ border }) {
-  const [quantity, setQuantity] = useState(1);
-
-  function increment() {
-    setQuantity((prev) => prev + 1);
-  }
-
-  function decrement() {
-    if (quantity === 0) return;
-    setQuantity((prev) => prev - 1);
-  }
-
+// Consider using an aria-label with a word or even a font icon which would have the name of the icon (add, remove) instead of + / -
+export function QuantityTool({ border, increment, decrement, quantity }) {
   return (
     <StyledCounter border={border ? true : false}>
       <CounterButton onClick={decrement}>−</CounterButton>
-      <StyledPara>{quantity}</StyledPara>
+      <StyledPara aria-label="quantity">{quantity}</StyledPara>
       <CounterButton onClick={increment}>+</CounterButton>
     </StyledCounter>
   );

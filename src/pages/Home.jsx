@@ -8,7 +8,7 @@ const Container = styled.div`
   background-image: url(${(props) => props.bgImg});
   background-size: cover;
   /* background-position: bottom center; */
-  background-position-y: 35%;
+  background-position-y: 25%;
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;

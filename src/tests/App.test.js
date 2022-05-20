@@ -1,7 +1,8 @@
 import { render, screen } from '@testing-library/react';
 import { MemoryRouter } from 'react-router-dom';
+import '@testing-library/jest-dom';
 import userEvent from '@testing-library/user-event';
-import App from './App';
+import App from '../pages/App';
 
 test.skip('Renders shop title on load', () => {
   render(<App />);

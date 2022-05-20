@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { ShopItem } from '../components/ShopItem';
-import { items } from '../constants/items';
 
 const Container = styled.div`
   background-color: ${(props) => props.theme.background};
@@ -25,7 +24,7 @@ const Title = styled.h1`
   margin-block: 2rem;
 `;
 
-export function Shop({ cart, setCart }) {
+export function Shop({ cart, setCart, items }) {
   const handleAddToCart = (id) => {
     const matchingItem = cart.some((item) => item.id === id);
     if (!matchingItem) {
@@ -40,7 +39,6 @@ export function Shop({ cart, setCart }) {
       }
       return item;
     });
-
     setCart(updatedCart);
   };
 

@@ -6,7 +6,6 @@ import { StyledTableRow } from '../styles/Table/StyledTableRow';
 import { StyledStack } from '../styles/Layout/StyledStack';
 import { StyledRow } from '../styles/Layout/StyledRow';
 import { QuantityTool } from './QuantityTool';
-import matcha from '../assets/matcha.jpg';
 
 const Container = styled.div`
   h4 {
@@ -42,29 +41,56 @@ const StyledIconContainer = styled.div`
   font-size: 1.1rem;
 `;
 
-function BriefInfo() {
-  return (
-    <StyledInfo center>
-      <h4>Matcha Tea</h4>
-      <p>A delicious healthy treat</p>
-    </StyledInfo>
-  );
-}
+export function CartItem({ quantity, targetItem, cart, setCart }) {
+  const total = () => {
+    const itemTotal = +targetItem.price * quantity;
+    return itemTotal.toLocaleString(
+      ('en-CA', { style: 'currency', currency: 'CAD' })
+    );
+  };
 
-export function CartItem() {
-  const total = '12.50';
+  function increment(id) {
+    const updatedCart = cart.map((item) => {
+      if (item.id === id) {
+        item.qty += 1;
+      }
+      return item;
+    });
+    setCart(updatedCart);
+  }
+
+  function decrement(id) {
+    const updatedCart = cart.map((item) => {
+      if (item.id === id) {
+        item.qty -= 1;
+      }
+      return item;
+    });
+
+    const filteredCart = updatedCart.filter((item) => item.qty > 0);
+
+    setCart(filteredCart);
+  }
+
   return (
     <Container>
       <StyledRow justify="space-around">
-        <StyledThumbnail src={matcha} />
-        <BriefInfo />
+        <StyledThumbnail src={targetItem.image} />
+        <StyledInfo center>
+          <h4>{targetItem.name}</h4>
+          <p>{targetItem.description}</p>
+        </StyledInfo>
         <StyledIconContainer>
-          <p>✕</p>
+          <p aria-label="close">✕</p>
         </StyledIconContainer>
       </StyledRow>
       <StyledRow justify="space-evenly" gap="2rem">
-        <QuantityTool />
-        <p>Item Total: ${total}</p>
+        <QuantityTool
+          increment={() => increment(targetItem.id)}
+          decrement={() => decrement(targetItem.id)}
+          quantity={quantity}
+        />
+        <p>Item Total: ${total()}</p>
       </StyledRow>
       <StyledDivider />
     </Container>

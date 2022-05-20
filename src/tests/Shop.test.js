@@ -1,6 +1,7 @@
 import { render, screen } from '@testing-library/react';
-import { MemoryRouter } from 'react-router-dom';
+import '@testing-library/jest-dom';
 import userEvent from '@testing-library/user-event';
+import { MemoryRouter } from 'react-router-dom';
 import { Shop } from '../pages/Shop';
 
 const mockCart = [
@@ -29,9 +30,8 @@ const mockItems = [
   },
 ];
 
-const mockSetCart = jest.fn();
-
 describe('Shop page', () => {
+  const mockSetCart = jest.fn();
   test('It renders the item titles', () => {
     render(<Shop cart={mockCart} items={mockItems} setCart={mockSetCart} />, {
       wrapper: MemoryRouter,
@@ -45,6 +45,7 @@ describe('Shop page', () => {
   });
 
   test('It renders the add to cart button', () => {
+    const mockSetCart = jest.fn();
     render(<Shop cart={mockCart} items={mockItems} setCart={mockSetCart} />, {
       wrapper: MemoryRouter,
     });
@@ -56,29 +57,8 @@ describe('Shop page', () => {
     expect(addToCartBtns[0]).toBeInTheDocument();
   });
 
-  test('Add to cart button calls setCart function with the correct cart item incremented by 1', () => {
-    render(<Shop cart={mockCart} items={mockItems} setCart={mockSetCart} />, {
-      wrapper: MemoryRouter,
-    });
-
-    const addToCartBtns = screen.getAllByRole('button', {
-      name: 'Add to Cart',
-    });
-
-    userEvent.click(addToCartBtns[0]);
-
-    expect(mockSetCart).toHaveBeenCalledWith([
-      {
-        id: 1,
-        qty: 3,
-      },
-    ]);
-
-    userEvent.click(addToCartBtns[1]);
-  });
-
   test('Add to cart button calls setCart function with the correct cart item added', () => {
-    // const freshMockSetCart = jest.fn();
+    const mockSetCart = jest.fn();
     render(<Shop cart={mockCart} items={mockItems} setCart={mockSetCart} />, {
       wrapper: MemoryRouter,
     });
@@ -96,6 +76,26 @@ describe('Shop page', () => {
       {
         id: 2,
         qty: 1,
+      },
+    ]);
+  });
+
+  test('Add to cart button calls setCart function with the correct cart item incremented by 1', () => {
+    const mockSetCart = jest.fn();
+    render(<Shop cart={mockCart} items={mockItems} setCart={mockSetCart} />, {
+      wrapper: MemoryRouter,
+    });
+
+    const addToCartBtns = screen.getAllByRole('button', {
+      name: 'Add to Cart',
+    });
+
+    userEvent.click(addToCartBtns[0]);
+
+    expect(mockSetCart).toHaveBeenCalledWith([
+      {
+        id: 1,
+        qty: 3,
       },
     ]);
   });

@@ -1,9 +1,10 @@
 import { BrowserRouter } from 'react-router-dom';
 import { Routes, Route } from 'react-router-dom';
-import App from '../App';
+import App from './App';
 import { Shop } from './Shop';
 import { Home } from './Home';
 import { Cart } from './Cart';
+import { items } from '../constants/items';
 
 import { useState } from 'react';
 
@@ -16,11 +17,11 @@ const RouteSwitch = () => {
           <Route index element={<Home />} />
           <Route
             path="/shop"
-            element={<Shop cart={cart} setCart={setCart} />}
+            element={<Shop cart={cart} setCart={setCart} items={items} />}
           />
           <Route
             path="/cart"
-            element={<Cart cart={cart} setCart={setCart} />}
+            element={<Cart cart={cart} setCart={setCart} items={items} />}
           />
         </Route>
       </Routes>
