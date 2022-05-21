@@ -47,6 +47,7 @@ export function Shop({ cart, setCart, items }) {
       item={item}
       key={index}
       handleClick={() => handleAddToCart(item.id)}
+      cart={cart}
     />
   ));
 

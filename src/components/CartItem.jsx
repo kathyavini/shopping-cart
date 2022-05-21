@@ -1,8 +1,5 @@
-import { useState } from 'react';
 import styled from 'styled-components';
-import { StyledButton } from '../styles/StyledButton';
 import { StyledDivider } from '../styles/Table/StyledDivider';
-import { StyledTableRow } from '../styles/Table/StyledTableRow';
 import { StyledStack } from '../styles/Layout/StyledStack';
 import { StyledRow } from '../styles/Layout/StyledRow';
 import { QuantityTool } from './QuantityTool';
@@ -10,6 +7,16 @@ import { QuantityTool } from './QuantityTool';
 const Container = styled.div`
   h4 {
     font-weight: 400;
+  }
+`;
+
+const ResponsiveRow = styled(StyledRow)`
+  justify-content: space-between;
+  padding-left: 2rem;
+
+  @media (min-width: ${(props) => props.theme.breakpoint}) {
+    justify-content: end;
+    gap: 3rem;
   }
 `;
 
@@ -73,14 +80,14 @@ export function CartItem({ quantity, targetItem, cart, setCart }) {
 
   function decrement(id) {
     const updatedCart = cart.map((item) => {
-      if (item.id === id) {
+      if (item.id === id && item.qty > 0) {
         item.qty -= 1;
       }
       return item;
     });
 
+    // I find the item disappearing kind of abrupt; I'd like to fix that
     const filteredCart = updatedCart.filter((item) => item.qty > 0);
-
     setCart(filteredCart);
   }
 
@@ -104,14 +111,14 @@ export function CartItem({ quantity, targetItem, cart, setCart }) {
           </span>
         </StyledIconContainer>
       </StyledRow>
-      <StyledRow justify="end" gap="5rem">
+      <ResponsiveRow>
         <QuantityTool
           increment={() => increment(targetItem.id)}
           decrement={() => decrement(targetItem.id)}
           quantity={quantity}
         />
         <p aria-label="item-total">${total()} CAD</p>
-      </StyledRow>
+      </ResponsiveRow>
       <StyledDivider />
     </Container>
   );

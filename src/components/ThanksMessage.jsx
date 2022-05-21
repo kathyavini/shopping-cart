@@ -1,5 +1,4 @@
 import styled from 'styled-components';
-import { StyledBadge } from '../styles/StyledBadge';
 import { StyledStack } from '../styles/Layout/StyledStack';
 
 const Container = styled.div`

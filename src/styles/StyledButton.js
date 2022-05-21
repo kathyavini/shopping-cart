@@ -38,9 +38,12 @@ StyledButton.defaultProps = {
 };
 
 export const StyledAnimatedButton = styled.button`
+  // Played with using trasitioned as a prop to set; it worked ok but what I really need is probably an animate in for a regular button
   font-family: ${(props) => props.theme.mainFont};
-  background: transparent;
-  color: ${(props) => props.theme.main};
+  background: ${(props) =>
+    props.transitioned ? props.theme.main : 'transparent'};
+  color: ${(props) =>
+    props.transitioned ? props.theme.secondaryContrast : props.theme.main};
   border: 1px solid ${(props) => props.theme.main};
   position: relative;
 
@@ -49,6 +52,8 @@ export const StyledAnimatedButton = styled.button`
   text-transform: uppercase;
   padding: 0.7rem 2rem;
   z-index: 1;
+  pointer-events: ${(props) => (props.transitioned ? 'none' : 'default')};
+
   /* padding: clamp(0.5rem, 0.2rem + 2vw, 0.7rem) clamp(1.5rem, 1rem + 2vw, 2rem); */
 
   &:hover {
@@ -59,23 +64,24 @@ export const StyledAnimatedButton = styled.button`
   &:after {
     content: '';
     background-color: ${(props) => props.theme.main};
-    border: 1px solid ${(props) => props.theme.main};
+    /* border: 1px solid ${(props) => props.theme.main}; */
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
     transform: scaleX(0);
-    transition: transform 200ms ease-in-out;
     transform-origin: 0% 50%;
     z-index: -1;
+    transition: transform 0ms;
   }
 
   &:hover:after {
     transform: scaleX(1);
+    transition: transform 200ms ease-in-out;
   }
 
   &:active {
-    filter: brightness(1.1);
+    filter: brightness(1.2);
   }
 `;

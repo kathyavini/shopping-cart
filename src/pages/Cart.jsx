@@ -4,8 +4,6 @@ import { CartItem } from '../components/CartItem';
 import { CartTitle } from '../components/CartTitle';
 import { CartSummary } from '../components/CartSummary';
 import { StyledButton } from '../styles/StyledButton';
-import { ThanksMessage } from '../components/ThanksMessage';
-import { useState } from 'react';
 
 const Container = styled.div`
   background-color: ${(props) => props.theme.background};
@@ -24,8 +22,6 @@ const EmptyCartMessage = styled.p`
 `;
 
 export function Cart({ cart, setCart, items }) {
-  const [thanksVisible, setThanksVisible] = useState(false);
-
   const cartItems = cart.map((cartItem, index) => {
     const [targetItem] = items.filter((item) => item.id === cartItem.id);
     return (
@@ -55,7 +51,6 @@ export function Cart({ cart, setCart, items }) {
           </Link>
         </>
       )}
-      {thanksVisible && <ThanksMessage />}
     </Container>
   );
 }

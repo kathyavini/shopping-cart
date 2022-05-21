@@ -1,12 +1,7 @@
-import { useState } from 'react';
-import { Link, NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import styled from 'styled-components';
-import { StyledButton } from '../styles/StyledButton';
 import { StyledDivider } from '../styles/Table/StyledDivider';
-import { StyledTableRow } from '../styles/Table/StyledTableRow';
-import { StyledStack } from '../styles/Layout/StyledStack';
 import { StyledRow } from '../styles/Layout/StyledRow';
-import { QuantityTool } from './QuantityTool';
 
 const StyledTitleRow = styled(StyledRow)`
   max-width: 100%;

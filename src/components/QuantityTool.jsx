@@ -1,6 +1,5 @@
 import styled from 'styled-components';
 import { StyledTableRow } from '../styles/Table/StyledTableRow';
-import { useState } from 'react';
 
 const StyledCounter = styled(StyledTableRow)`
   border: 1px solid
@@ -20,19 +19,22 @@ const CounterButton = styled.button`
   color: ${(props) => props.theme.main};
   border: none;
 
-  font-size: 1rem;
+  font-size: 1.3rem;
   font-weight: 300;
   text-transform: uppercase;
   padding: 0.7rem 1.2rem;
   transition: background 200ms;
 
-  &:hover {
-    background: ${(props) => props.theme.secondary};
-    color: ${(props) => props.theme.white};
-  }
+  @media (pointer: fine) {
+    font-size: 1rem;
+    &:hover {
+      background: ${(props) => props.theme.secondary};
+      color: ${(props) => props.theme.white};
+    }
 
-  &:active {
-    filter: brightness(1.1);
+    &:active {
+      filter: brightness(1.1);
+    }
   }
 `;
 

@@ -1,5 +1,5 @@
 import styled from 'styled-components';
-import { Link, NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { StyledButton } from '../styles/StyledButton';
 
 const Container = styled.div`

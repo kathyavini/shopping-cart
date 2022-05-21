@@ -17,4 +17,5 @@ html, body, #root, .app-container {
     flex-flow: column nowrap;
     align-items: center;
     background-color: #faf4e8;
+    position: relative;
 }

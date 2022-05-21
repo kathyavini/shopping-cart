@@ -1,14 +1,11 @@
 import styled from 'styled-components';
-// import { useState } from 'react'
-
-import { Link, NavLink } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import { StyledButton } from '../styles/StyledButton';
 import { StyledBadge } from '../styles/StyledBadge';
 import { StyledDivider } from '../styles/Table/StyledDivider';
 import { StyledTableRow } from '../styles/Table/StyledTableRow';
 import { StyledStack } from '../styles/Layout/StyledStack';
-
 import { ExpandableRow } from './ExpandableRow';
 
 const Container = styled.div`
@@ -22,7 +19,6 @@ const Container = styled.div`
     column-gap: 2rem;
 
     > * {
-      /* width: 50%; */
       flex: 1;
     }
   }
@@ -35,8 +31,6 @@ Container.defaultProps = {
 };
 
 export function CartSummary({ items, cart }) {
-  // const [freeShipping, setFreeShipping] = useState(false);
-
   const total = () => {
     let count = 0;
     cart.forEach((cartItem) => {
