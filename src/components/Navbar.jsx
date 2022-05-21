@@ -119,8 +119,8 @@ export function Navbar({ cart }) {
   };
 
   return (
-    <FullHeightContainer transparent={location.pathname == '/'}>
-      <Container transparent={location.pathname == '/'}>
+    <FullHeightContainer transparent={location.pathname === '/'}>
+      <Container transparent={location.pathname === '/'}>
         <ShopTitle>Chah</ShopTitle>
         <LinksContainer>
           <NavLink to="/">
@@ -132,7 +132,7 @@ export function Navbar({ cart }) {
           <NavLink to="/cart">
             <MainLinks>
               <Icon className="material-icons">shopping_cart</Icon>
-              <Badge green={location.pathname == '/'}>
+              <Badge green={location.pathname === '/'}>
                 <p>{itemCount()}</p>
               </Badge>
             </MainLinks>

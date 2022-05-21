@@ -54,7 +54,7 @@ export function CartSummary({ items, cart }) {
         <StyledBadge>
           <p aria-label="free-shipping">
             {remainShipping() > 0
-              ? `You are only \$${remainShipping().toFixed(
+              ? `You are only $${remainShipping().toFixed(
                   2
                 )} away from Free Domestic Shipping!`
               : 'Your order qualifies for Free Domestic Shipping!'}
