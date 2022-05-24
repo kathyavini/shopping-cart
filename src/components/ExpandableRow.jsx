@@ -3,6 +3,7 @@ import {
   StyledExpandable,
   StyledTextArea,
 } from '../styles/Table/StyledExpandable';
+import { motion } from 'framer-motion';
 
 export function ExpandableRow({ children }) {
   const [expanded, setExpanded] = useState(false);
@@ -13,11 +14,13 @@ export function ExpandableRow({ children }) {
 
   return (
     <>
-      <StyledExpandable onClick={toggleExpanded}>
-        {children}
-        <p>{expanded ? '-' : '+'}</p>
-      </StyledExpandable>
-      {expanded && <StyledTextArea></StyledTextArea>}
+      <motion.div layout>
+        <StyledExpandable layout onClick={toggleExpanded}>
+          {children}
+          <p>{expanded ? '-' : '+'}</p>
+        </StyledExpandable>
+        {expanded && <StyledTextArea></StyledTextArea>}
+      </motion.div>
     </>
   );
 }

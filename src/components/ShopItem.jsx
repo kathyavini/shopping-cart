@@ -10,12 +10,6 @@ const Container = styled.div`
   font-family: ${(props) => props.theme.secondaryFont};
   padding: clamp(0.5rem, 4vw, 2.5rem);
   transition: all 100ms;
-
-  &:hover {
-    /* background-color: ${(props) => props.theme.white};
-    box-shadow: 1.1rem 1rem 0.2rem 0.2rem
-      ${(props) => props.theme.secondaryContrast}; */
-  }
 `;
 
 const StyledImage = styled.img`

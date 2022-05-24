@@ -1,8 +1,10 @@
 import styled from 'styled-components';
 import { StyledTableRow } from './StyledTableRow';
+import { motion } from 'framer-motion';
 
-export const StyledTextArea = styled.textarea`
-  margin-top: -0.5rem;
+export const StyledTextArea = styled(motion.textarea)`
+  width: 100%;
+  margin-top: 0.5rem;
   font-family: ${(props) => props.theme.mainFont};
   padding: 0.4rem;
 `;

@@ -3,8 +3,9 @@ import { StyledDivider } from '../styles/Table/StyledDivider';
 import { StyledStack } from '../styles/Layout/StyledStack';
 import { StyledRow } from '../styles/Layout/StyledRow';
 import { QuantityTool } from './QuantityTool';
+import { motion, AnimatePresence } from 'framer-motion';
 
-const Container = styled.div`
+const Container = styled(motion.div)`
   h4 {
     font-weight: 400;
   }
@@ -98,7 +99,7 @@ export function CartItem({ quantity, targetItem, cart, setCart }) {
   }
 
   return (
-    <Container>
+    <Container layout>
       <StyledRow justify="space-around">
         <StyledThumbnail src={targetItem.image} />
         <StyledInfo center>

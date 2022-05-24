@@ -7,8 +7,9 @@ import { StyledDivider } from '../styles/Table/StyledDivider';
 import { StyledTableRow } from '../styles/Table/StyledTableRow';
 import { StyledStack } from '../styles/Layout/StyledStack';
 import { ExpandableRow } from './ExpandableRow';
+import { motion } from 'framer-motion';
 
-const Container = styled.div`
+const Container = styled(motion.div)`
   margin-top: 2rem;
   display: flex;
   flex-flow: column nowrap;
@@ -30,7 +31,7 @@ Container.defaultProps = {
   },
 };
 
-export function CartSummary({ items, cart }) {
+export function CartSummary({ items, cart, showMsg }) {
   const total = () => {
     let count = 0;
     cart.forEach((cartItem) => {
@@ -45,7 +46,7 @@ export function CartSummary({ items, cart }) {
   };
 
   return (
-    <Container>
+    <Container layout>
       {/* Left section after breakpoint */}
       <StyledStack gap="1rem">
         <ExpandableRow>
@@ -89,7 +90,9 @@ export function CartSummary({ items, cart }) {
               Continue Shopping
             </StyledButton>
           </Link>
-          <StyledButton filled>CheckOut</StyledButton>
+          <StyledButton filled onClick={showMsg}>
+            CheckOut
+          </StyledButton>
         </StyledStack>
       </StyledStack>
     </Container>

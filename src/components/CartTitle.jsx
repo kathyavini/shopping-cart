@@ -2,6 +2,7 @@ import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { StyledDivider } from '../styles/Table/StyledDivider';
 import { StyledRow } from '../styles/Layout/StyledRow';
+import { motion } from 'framer-motion';
 
 const StyledTitleRow = styled(StyledRow)`
   max-width: 100%;

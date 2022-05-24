@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 import { ShopItem } from '../components/ShopItem';
+import { motion } from 'framer-motion';
 
 const Container = styled.div`
   background-color: ${(props) => props.theme.background};

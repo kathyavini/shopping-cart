@@ -3,9 +3,12 @@ import { Link } from 'react-router-dom';
 import { CartItem } from '../components/CartItem';
 import { CartTitle } from '../components/CartTitle';
 import { CartSummary } from '../components/CartSummary';
+import { ThanksMessage } from '../components/ThanksMessage';
 import { StyledButton } from '../styles/StyledButton';
+import { motion, AnimatePresence } from 'framer-motion';
+import { useState } from 'react';
 
-const Container = styled.div`
+const Container = styled(motion.div)`
   background-color: ${(props) => props.theme.background};
   padding: 3vw;
   max-width: 900px;
@@ -22,6 +25,18 @@ const EmptyCartMessage = styled.p`
 `;
 
 export function Cart({ cart, setCart, items }) {
+  const [showThanks, setShowThanks] = useState(false);
+
+  function hideMsg(event) {
+    event.stopPropagation();
+    setShowThanks(false);
+  }
+
+  function showMsg(event) {
+    event.stopPropagation();
+    setShowThanks(true);
+  }
+
   const cartItems = cart.map((cartItem, index) => {
     const [targetItem] = items.filter((item) => item.id === cartItem.id);
     return (
@@ -40,8 +55,8 @@ export function Cart({ cart, setCart, items }) {
       <CartTitle cart={cart} />
       {cart.length ? (
         <>
-          {cartItems}
-          <CartSummary items={items} cart={cart} />{' '}
+          <motion.div layout>{cartItems}</motion.div>
+          <CartSummary items={items} cart={cart} showMsg={showMsg} />
         </>
       ) : (
         <>
@@ -51,6 +66,9 @@ export function Cart({ cart, setCart, items }) {
           </Link>
         </>
       )}
+      <AnimatePresence exitBeforeEnter>
+        {showThanks && <ThanksMessage hideMsg={hideMsg} />}
+      </AnimatePresence>
     </Container>
   );
 }

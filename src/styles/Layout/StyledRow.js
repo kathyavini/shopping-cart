@@ -1,6 +1,7 @@
 import styled from 'styled-components';
+import { motion } from 'framer-motion';
 
-export const StyledRow = styled.div`
+export const StyledRow = styled(motion.div)`
   display: flex;
   flex-flow: row nowrap;
   width: 100%;
