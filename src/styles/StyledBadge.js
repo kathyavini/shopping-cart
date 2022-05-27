@@ -1,9 +1,9 @@
 import styled from 'styled-components';
 
 export const StyledBadge = styled.div`
-  font-family: ${(props) => props.theme.mainFont};
-  background: ${(props) => props.theme.contrast};
-  color: ${(props) => props.theme.white};
+  font-family: var(--mainFont);
+  background: var(--contrast);
+  color: var(--white);
 
   font-size: 1rem;
   padding: 1rem 2rem;
@@ -18,11 +18,3 @@ export const StyledBadge = styled.div`
 
   row-gap: ${(props) => props.gap || '0.7rem'};
 `;
-
-StyledBadge.defaultProps = {
-  theme: {
-    contrast: 'papayawhip',
-    white: 'palevioletred',
-    mainFont: 'helvetica, sans-serif',
-  },
-};

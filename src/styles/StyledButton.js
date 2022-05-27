@@ -1,25 +1,25 @@
 import styled from 'styled-components';
 
 export const StyledButton = styled.button`
-  font-family: ${(props) => props.theme.mainFont};
-  background: ${(props) => (props.filled ? props.theme.main : 'transparent')};
-  color: ${(props) => (props.filled ? props.theme.white : props.theme.main)};
-  border: 1px solid ${(props) => props.theme.main};
+  border: 1px solid var(--main);
+  padding: 0.7rem 2rem;
 
+  font-family: var(--mainFont);
   font-size: 1rem;
   font-weight: 300;
   text-transform: uppercase;
-  padding: 0.7rem 2rem;
-  /* padding: clamp(0.5rem, 0.2rem + 2vw, 0.7rem) clamp(1.5rem, 1rem + 2vw, 2rem); */
+
+  background: ${(props) => (props.filled ? 'var(--main)' : 'transparent')};
+  color: ${(props) => (props.filled ? 'var(--white)' : 'var(--main)')};
 
   &:hover {
     background: ${(props) =>
-      props.filled ? props.theme.secondary : 'transparent'};
+      props.filled ? 'var(--secondary)' : 'transparent'};
     color: ${(props) =>
-      props.filled ? props.theme.white : props.theme.secondaryContrast};
+      props.filled ? 'var(--white)' : 'var(--secondaryContrast)'};
     border: 1px solid
       ${(props) =>
-        props.filled ? props.theme.secondary : props.theme.secondaryContrast};
+        props.filled ? 'var(--secondary)' : 'var(--secondaryContrast)'};
   }
 
   &:active {
@@ -27,44 +27,28 @@ export const StyledButton = styled.button`
   }
 `;
 
-StyledButton.defaultProps = {
-  theme: {
-    main: 'palevioletred',
-    secondary: 'rebeccapurple',
-    secondaryContrast: 'rebeccapurple',
-    white: 'white',
-    mainFont: 'helvetica, sans-serif',
-  },
-};
-
 export const StyledAnimatedButton = styled.button`
-  // Played with using trasitioned as a prop to set; it worked ok but what I really need is probably an animate in for a regular button
-  font-family: ${(props) => props.theme.mainFont};
-  background: ${(props) =>
-    props.transitioned ? props.theme.main : 'transparent'};
-  color: ${(props) =>
-    props.transitioned ? props.theme.secondaryContrast : props.theme.main};
-  border: 1px solid ${(props) => props.theme.main};
   position: relative;
 
+  background: transparent;
+  padding: 0.7rem 2rem;
+  border: 1px solid var(--main);
+
+  color: var(--main);
   font-size: 1rem;
   font-weight: 300;
   text-transform: uppercase;
-  padding: 0.7rem 2rem;
-  z-index: 1;
-  pointer-events: ${(props) => (props.transitioned ? 'none' : 'default')};
 
-  /* padding: clamp(0.5rem, 0.2rem + 2vw, 0.7rem) clamp(1.5rem, 1rem + 2vw, 2rem); */
+  z-index: 1;
 
   &:hover {
-    color: ${(props) => props.theme.secondaryContrast};
-    border: 1px solid ${(props) => props.theme.secondaryContrast};
+    color: var(--secondaryContrast);
+    border: 1px solid var(--secondaryContrast);
   }
 
   &:after {
     content: '';
-    background-color: ${(props) => props.theme.main};
-    /* border: 1px solid ${(props) => props.theme.main}; */
+    background-color: var(--main);
     position: absolute;
     top: 0;
     left: 0;

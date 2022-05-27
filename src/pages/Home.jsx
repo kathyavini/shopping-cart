@@ -7,28 +7,28 @@ const Container = styled.div`
   width: 100vw;
   background-image: url(${(props) => props.bgimg[1]});
   background-size: cover;
-  background-position-y: 25%;
   display: flex;
   flex-flow: column nowrap;
   justify-content: center;
   align-items: center;
   gap: 2rem;
 
-  @media (min-width: ${(props) => props.theme.breakpointM}) {
+  @media (min-width: ${(props) => props.theme.breakpointM || '850px'}) {
     background-image: url(${(props) => props.bgimg[0]});
+    background-position-y: 25%;
   }
 `;
 
 const HomeTitle = styled.h1`
-  color: ${(props) => props.theme.white};
-  font-family: ${(props) => props.theme.secondaryFont};
+  color: var(--white);
+  font-family: var(--secondaryFont);
   font-size: 6rem;
   margin-top: -10vh;
 `;
 
 const backgroundImages = [
-  'https://source.unsplash.com/Tp1yIvG7aBw/',
-  'https://source.unsplash.com/E0_DOo06c8U/',
+  require('../assets/background-copper.jpg'),
+  require('../assets/background-black.jpg'),
 ];
 
 export function Home() {

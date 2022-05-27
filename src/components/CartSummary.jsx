@@ -9,13 +9,13 @@ import { StyledStack } from '../styles/Layout/StyledStack';
 import { ExpandableRow } from './ExpandableRow';
 import { motion } from 'framer-motion';
 
-const Container = styled(motion.div)`
+const ResponsiveContainer = styled(motion.div)`
   margin-top: 2rem;
   display: flex;
   flex-flow: column nowrap;
   row-gap: 2rem;
 
-  @media (min-width: ${(props) => props.theme.breakpoint}) {
+  @media (min-width: ${(props) => props.theme.breakpoint || '650px'}) {
     flex-direction: row;
     column-gap: 2rem;
 
@@ -25,28 +25,23 @@ const Container = styled(motion.div)`
   }
 `;
 
-Container.defaultProps = {
-  theme: {
-    breakpoint: '650px',
-  },
-};
-
 export function CartSummary({ items, cart, showMsg }) {
-  const total = () => {
-    let count = 0;
+  const cartTotal = () => {
+    let subtotal = 0;
     cart.forEach((cartItem) => {
       const [targetItem] = items.filter((item) => item.id === cartItem.id);
-      count += cartItem.qty * +targetItem.price;
+      subtotal += cartItem.qty * Number(targetItem.price);
     });
-    return count.toFixed(2);
+    return subtotal.toFixed(2);
   };
 
   const remainShipping = () => {
-    return 50 - +total();
+    const untilFreeShipping = 50 - Number(cartTotal());
+    return untilFreeShipping.toFixed(2);
   };
 
   return (
-    <Container layout>
+    <ResponsiveContainer layout>
       {/* Left section after breakpoint */}
       <StyledStack gap="1rem">
         <ExpandableRow>
@@ -55,9 +50,7 @@ export function CartSummary({ items, cart, showMsg }) {
         <StyledBadge>
           <p aria-label="free-shipping">
             {remainShipping() > 0
-              ? `You are only $${remainShipping().toFixed(
-                  2
-                )} away from Free Domestic Shipping!`
+              ? `You are only $${remainShipping()} away from Free Domestic Shipping!`
               : 'Your order qualifies for Free Domestic Shipping!'}
           </p>
           {remainShipping() > 0 && <p>(Excludes International)</p>}
@@ -68,7 +61,7 @@ export function CartSummary({ items, cart, showMsg }) {
         <StyledStack gap="1rem">
           <StyledTableRow>
             <p>subtotal</p>
-            <p>${total()} </p>
+            <p>${cartTotal()} </p>
           </StyledTableRow>
           <StyledTableRow>
             <p>tax</p>
@@ -81,7 +74,7 @@ export function CartSummary({ items, cart, showMsg }) {
           <StyledDivider />
           <StyledTableRow>
             <p>total</p>
-            <h4 aria-label="cart-total">${total()} CAD</h4>
+            <h4 aria-label="cart-total">${cartTotal()} CAD</h4>
           </StyledTableRow>
         </StyledStack>
         <StyledStack gap="0.5rem">
@@ -95,6 +88,6 @@ export function CartSummary({ items, cart, showMsg }) {
           </StyledButton>
         </StyledStack>
       </StyledStack>
-    </Container>
+    </ResponsiveContainer>
   );
 }

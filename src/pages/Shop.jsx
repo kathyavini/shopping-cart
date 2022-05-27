@@ -3,7 +3,7 @@ import { ShopItem } from '../components/ShopItem';
 import { motion } from 'framer-motion';
 
 const Container = styled.div`
-  background-color: ${(props) => props.theme.background};
+  background-color: var(--background);
   width: 100vw;
   text-align: center;
   display: grid;
@@ -20,27 +20,27 @@ const Content = styled.div`
 `;
 
 const Title = styled.h1`
-  font-family: ${(props) => props.theme.secondaryFont};
+  font-family: var(--secondaryFont);
   font-size: clamp(2rem, 1.5rem + 4v, 3rem);
   margin-block: 2rem;
 `;
 
 export function Shop({ cart, setCart, items }) {
   const handleAddToCart = (id) => {
-    const matchingItem = cart.some((item) => item.id === id);
-    if (!matchingItem) {
-      setCart([...cart, { id: id, qty: 1 }]);
-      return;
-    }
+    const alreadyInCart = cart.some((item) => item.id === id);
 
-    const updatedCart = cart.map((item) => {
-      if (item.id === id) {
-        item.qty += 1;
-        // Although I'm thinking of disabling the add button in favour of an "in cart" button
-      }
-      return item;
-    });
-    setCart(updatedCart);
+    if (!alreadyInCart) {
+      setCart([...cart, { id: id, qty: 1 }]);
+    } else {
+      const updatedCart = cart.map((item) => {
+        if (item.id === id) {
+          item.qty += 1;
+        }
+        return item;
+      });
+
+      setCart(updatedCart);
+    }
   };
 
   const renderedItems = items.map((item, index) => (

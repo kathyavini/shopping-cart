@@ -3,7 +3,7 @@ import { StyledDivider } from '../styles/Table/StyledDivider';
 import { StyledStack } from '../styles/Layout/StyledStack';
 import { StyledRow } from '../styles/Layout/StyledRow';
 import { QuantityTool } from './QuantityTool';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 const Container = styled(motion.div)`
   h4 {
@@ -11,11 +11,11 @@ const Container = styled(motion.div)`
   }
 `;
 
-const ResponsiveRow = styled(StyledRow)`
+export const ResponsiveRow = styled(StyledRow)`
   justify-content: space-between;
   padding-left: 2rem;
 
-  @media (min-width: ${(props) => props.theme.breakpoint}) {
+  @media (min-width: ${(props) => props.theme.breakpoint || '650px'}) {
     justify-content: end;
     gap: 3rem;
   }
@@ -27,7 +27,7 @@ const StyledThumbnail = styled.img`
   object-fit: cover;
   border-radius: 3px;
 
-  @media (min-width: ${(props) => props.theme.breakpointM}) {
+  @media (min-width: ${(props) => props.theme.breakpointM || '850px'}) {
     width: 125px;
     height: 125px;
   }
@@ -54,8 +54,8 @@ const StyledIconContainer = styled.div`
   }
 
   span:hover {
-    background-color: ${(props) => props.theme.secondary};
-    color: ${(props) => props.theme.secondaryContrast};
+    background-color: var(--secondary);
+    color: var(--secondaryContrast);
   }
 
   span:active {
@@ -87,8 +87,8 @@ export function CartItem({ quantity, targetItem, cart, setCart }) {
       return item;
     });
 
-    // I find the item disappearing kind of abrupt; I'd like to fix that
     const filteredCart = updatedCart.filter((item) => item.qty > 0);
+
     setCart(filteredCart);
   }
 

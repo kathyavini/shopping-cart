@@ -1,60 +1,64 @@
 import styled from 'styled-components';
-import { StyledStack } from '../styles/Layout/StyledStack';
-import { motion, AnimatePresence } from 'framer-motion';
+import { motion } from 'framer-motion';
 
 const Backdrop = styled(motion.div)`
+  width: 100vw;
+  height: 100vh;
   position: fixed;
   top: 0;
   left: 0;
+
   display: grid;
   place-content: center;
-  width: 100vw;
-  height: 100vh;
-  z-index: 20;
+
   background-color: hsl(0, 0%, 0%, 0.5);
+  z-index: 20;
 `;
 
 const Message = styled(motion.div)`
+  width: clamp(300px, 70vw, 500px);
   display: flex;
+
   flex-flow: column nowrap;
   justify-content: center;
   align-items: center;
-  gap: 2rem;
-  width: clamp(300px, 70vw, 500px);
-  font-size: clamp(1.3rem, 0.9rem + 2vw, 2rem);
-  background-color: ${(props) => props.theme.background};
-  line-height: 2.2rem;
   text-align: center;
-  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  gap: 2rem;
+
+  background-color: var(--background);
   padding-block: 4rem;
   padding-inline: 2rem;
   border-radius: 3px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+
+  font-size: 1.2rem;
+  line-height: 2.2rem;
 
   h3 {
-    font-family: ${(props) => props.theme.secondaryFont};
+    font-family: var(--secondaryFont);
   }
 
   p {
-    font-family: ${(props) => props.theme.mainFont};
+    font-family: var(--mainFont);
   }
   a {
-    color: ${(props) => props.theme.tertiaryContrast};
+    color: var(--tertiaryContrast);
     text-decoration: none;
   }
 
   a:hover {
-    color: ${(props) => props.theme.contrast};
+    color: var(--contrast);
     text-decoration: underline;
   }
 `;
 
 const Icon = styled.span`
-  color: ${(props) => props.theme.tertiaryContrast};
+  color: var(--tertiaryContrast);
   vertical-align: middle;
 `;
 
 export function ThanksMessage({ hideMsg }) {
-  const backdrop = {
+  const backdropVariants = {
     hidden: {
       opacity: 0,
     },
@@ -66,7 +70,7 @@ export function ThanksMessage({ hideMsg }) {
     },
   };
 
-  const modal = {
+  const modalVariants = {
     hidden: {
       y: `-110vh`,
       opacity: 0,
@@ -84,20 +88,23 @@ export function ThanksMessage({ hideMsg }) {
   return (
     <Backdrop
       onClick={hideMsg}
-      variants={backdrop}
+      variants={backdropVariants}
       initial="hidden"
       animate="visible"
       exit="exit"
     >
-      <Message variants={modal}>
+      <Message
+        variants={modalVariants}
+        onClick={(event) => event.stopPropagation()}
+      >
         <h3>Thanks for shopping!</h3>
 
         <p>
           This isn't a real store, but you can check out the{' '}
           <a href="https://themes.shopify.com/themes/foodie/styles/grind">
-            real Shopify theme it's based on
-          </a>
-          .
+            real Shopify theme
+          </a>{' '}
+          I used as design inspiration.
         </p>
 
         <p>

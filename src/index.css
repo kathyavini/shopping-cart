@@ -1,3 +1,23 @@
+:root {
+    --main: #303030;
+    --secondary: #404040;
+    --contrast: #3b5442;
+    --secondaryContrast: #ece2cc;
+    --tertiaryContrast: #745d4a;
+    --background: #faf4e8;
+    --white: white;
+
+    --mainFont: 'Work Sans', sans-serif;
+    --secondaryFont: 'Playfair Display', serif;
+
+    --breakpoint: 650px;
+    --breakpointM: 850px;
+    --respS: clamp(0.8rem, 0.7rem + 4vw, 1.7rem);
+    --respM: clamp(1.3rem, 0.9rem + 2vw, 2rem);
+    --respL: clamp(2rem, 1rem + 4vw, 4rem);
+    --respXL: clamp(3rem, 2rem + 4vw, 5rem);
+}
+
 * {
     /* outline: 1px solid salmon; */
     margin: 0;
@@ -18,4 +38,6 @@ html, body, #root, .app-container {
     align-items: center;
     background-color: #faf4e8;
     position: relative;
+    font: var(--mainFont);
+    color: var(--main);
 }

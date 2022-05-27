@@ -1,19 +1,21 @@
 import styled from 'styled-components';
-import { StyledRow } from '../Layout/StyledRow';
+import { motion } from 'framer-motion';
 
-export const StyledTableRow = styled(StyledRow)`
-  font-family: ${(props) => props.theme.mainFont};
+export const StyledTableRow = styled(motion.div)`
+  width: 100%;
+
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+
+  font-family: var(--mainFont);
   font-weight: 300;
-  color: ${(props) => props.theme.main};
+  color: var(--main);
+
+  justify-content: ${(props) => props.justify || 'space-between'};
+  column-gap: ${(props) => props.gap || '0px'};
 
   p:first-child {
     text-transform: uppercase;
   }
 `;
-
-StyledTableRow.defaultProps = {
-  theme: {
-    main: '#282c34',
-    mainFont: 'helvetica, sans-serif',
-  },
-};

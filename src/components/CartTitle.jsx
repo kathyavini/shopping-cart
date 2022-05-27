@@ -1,10 +1,19 @@
 import { Link } from 'react-router-dom';
 import styled from 'styled-components';
 import { StyledDivider } from '../styles/Table/StyledDivider';
-import { StyledRow } from '../styles/Layout/StyledRow';
-import { motion } from 'framer-motion';
 
-const StyledTitleRow = styled(StyledRow)`
+const StyledTitleRow = styled.div`
+  width: 100%;
+
+  display: flex;
+  flex-flow: row nowrap;
+  align-items: center;
+  justify-content: space-between;
+
+  font-family: var(--mainFont);
+  font-weight: 300;
+  color: var(--main);
+
   max-width: 100%;
   padding: 1rem;
 
@@ -14,7 +23,7 @@ const StyledTitleRow = styled(StyledRow)`
 
   h1 {
     text-align: center;
-    font-family: ${(props) => props.theme.secondaryFont};
+    font-family: var(--secondaryFont);
     font-size: 2.8rem;
   }
 
@@ -32,17 +41,17 @@ const BackContainer = styled(Link)`
   font-size: 2rem;
   font-weight: 400;
   text-decoration: none;
-  color: ${(props) => props.theme.main};
+  color: var(--main);
 
   span:nth-child(2) {
     display: none;
   }
 
   &:active {
-    color: ${(props) => props.theme.secondaryContrast};
+    color: var(--secondaryContrast);
   }
 
-  @media (min-width: ${(props) => props.theme.breakpointM}) {
+  @media (min-width: ${(props) => props.theme.breakpointM || '850px'}) {
     span:nth-child(2) {
       display: inline-block;
       font-size: 1rem;

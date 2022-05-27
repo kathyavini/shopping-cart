@@ -2,8 +2,7 @@ import styled from 'styled-components';
 import { StyledTableRow } from '../styles/Table/StyledTableRow';
 
 const StyledCounter = styled(StyledTableRow)`
-  border: 1px solid
-    ${(props) => (props.border ? props.theme.main : 'transparent')};
+  border: 1px solid ${(props) => (props.border ? 'var(--main)' : 'transparent')};
   width: min-content;
 `;
 
@@ -14,9 +13,9 @@ const StyledPara = styled.p`
 `;
 
 const CounterButton = styled.button`
-  font-family: ${(props) => props.theme.mainFont};
-  background: ${(props) => (props.filled ? props.theme.main : 'transparent')};
-  color: ${(props) => props.theme.main};
+  font-family: var(--mainFont);
+  background: transparent;
+  color: var(--main);
   border: none;
 
   font-size: 1.3rem;
@@ -28,8 +27,8 @@ const CounterButton = styled.button`
   @media (pointer: fine) {
     font-size: 1rem;
     &:hover {
-      background: ${(props) => props.theme.secondary};
-      color: ${(props) => props.theme.white};
+      background: var(--secondary);
+      color: var(--white);
     }
 
     &:active {
@@ -38,17 +37,10 @@ const CounterButton = styled.button`
   }
 `;
 
-StyledCounter.defaultProps = {
-  theme: {
-    main: '#282c34',
-    mainFont: 'helvetica, sans-serif',
-  },
-};
-
-// Consider using an aria-label with a word or even a font icon which would have the name of the icon (add, remove) instead of + / -
 export function QuantityTool({ border, increment, decrement, quantity }) {
   return (
-    <StyledCounter border={border ? true : false}>
+    // For the $prop syntax see https://styled-components.com/docs/api#transient-props
+    <StyledCounter $border={border ? true : false}>
       <CounterButton onClick={decrement}>−</CounterButton>
       <StyledPara aria-label="quantity">{quantity}</StyledPara>
       <CounterButton onClick={increment}>+</CounterButton>

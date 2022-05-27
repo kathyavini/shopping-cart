@@ -9,7 +9,7 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { useState } from 'react';
 
 const Container = styled(motion.div)`
-  background-color: ${(props) => props.theme.background};
+  background-color: var(--background);
   padding: 3vw;
   max-width: 900px;
   width: 100%;
@@ -20,22 +20,12 @@ const Container = styled(motion.div)`
 `;
 
 const EmptyCartMessage = styled.p`
-  font-size: clamp(1.3rem, 0.9rem + 2vw, 2rem);
+  font-size: var(--respM);
   padding: 4rem;
 `;
 
 export function Cart({ cart, setCart, items }) {
   const [showThanks, setShowThanks] = useState(false);
-
-  function hideMsg(event) {
-    event.stopPropagation();
-    setShowThanks(false);
-  }
-
-  function showMsg(event) {
-    event.stopPropagation();
-    setShowThanks(true);
-  }
 
   const cartItems = cart.map((cartItem, index) => {
     const [targetItem] = items.filter((item) => item.id === cartItem.id);
@@ -56,7 +46,11 @@ export function Cart({ cart, setCart, items }) {
       {cart.length ? (
         <>
           <motion.div layout>{cartItems}</motion.div>
-          <CartSummary items={items} cart={cart} showMsg={showMsg} />
+          <CartSummary
+            items={items}
+            cart={cart}
+            showMsg={() => setShowThanks(true)}
+          />
         </>
       ) : (
         <>
@@ -67,7 +61,7 @@ export function Cart({ cart, setCart, items }) {
         </>
       )}
       <AnimatePresence exitBeforeEnter>
-        {showThanks && <ThanksMessage hideMsg={hideMsg} />}
+        {showThanks && <ThanksMessage hideMsg={() => setShowThanks(false)} />}
       </AnimatePresence>
     </Container>
   );

@@ -1,9 +1,32 @@
 import { useState } from 'react';
-import {
-  StyledExpandable,
-  StyledTextArea,
-} from '../styles/Table/StyledExpandable';
+import styled from 'styled-components';
 import { motion } from 'framer-motion';
+import { StyledTableRow } from '../styles/Table/StyledTableRow';
+
+const StyledTextArea = styled(motion.textarea)`
+  width: 100%;
+  margin-top: 0.5rem;
+  padding: 0.4rem;
+
+  font-family: var(--mainFont);
+`;
+
+const StyledExpandable = styled(StyledTableRow)`
+  padding: 3px;
+
+  p {
+    pointer-events: none;
+  }
+
+  p:first-child {
+    text-transform: none;
+  }
+
+  &:hover {
+    border: 1px dashed var(--main);
+    padding: 2px;
+  }
+`;
 
 export function ExpandableRow({ children }) {
   const [expanded, setExpanded] = useState(false);
