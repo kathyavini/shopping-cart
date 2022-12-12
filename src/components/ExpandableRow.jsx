@@ -38,7 +38,7 @@ export function ExpandableRow({ children }) {
   return (
     <>
       <motion.div layout>
-        <StyledExpandable layout onClick={toggleExpanded}>
+        <StyledExpandable layout="position" onClick={toggleExpanded}>
           {children}
           <p>{expanded ? '-' : '+'}</p>
         </StyledExpandable>

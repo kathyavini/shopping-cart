@@ -12,14 +12,17 @@ export const StyledButton = styled.button`
   background: ${(props) => (props.filled ? 'var(--main)' : 'transparent')};
   color: ${(props) => (props.filled ? 'var(--white)' : 'var(--main)')};
 
+  position: relative;
+  z-index: 10;
+
   &:hover {
     background: ${(props) =>
       props.filled ? 'var(--secondary)' : 'transparent'};
     color: ${(props) =>
-      props.filled ? 'var(--white)' : 'var(--secondaryContrast)'};
+      props.filled ? 'var(--white)' : 'var(--tertiaryContrast)'};
     border: 1px solid
       ${(props) =>
-        props.filled ? 'var(--secondary)' : 'var(--secondaryContrast)'};
+        props.filled ? 'var(--secondary)' : 'var(--tertiaryContrast)'};
   }
 
   &:active {
